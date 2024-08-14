@@ -4,10 +4,19 @@ import { formatCurrency } from './utils';
 // Fetch all revenue data
 export async function fetchRevenue() {
   try {
+    // Kami sengaja menunda respons untuk tujuan demo.
+    // Jangan lakukan ini di produksi :)
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     const data = await sql`SELECT * FROM revenue`;
+
+    console.log('Data fetch completed after 3 seconds.');
+
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch revenue data.');
   }
 }
@@ -29,7 +38,8 @@ export async function fetchLatestInvoices() {
     }));
     return latestInvoices;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch the latest invoices.');
   }
 }
@@ -64,7 +74,8 @@ export async function fetchCardData() {
       totalPendingInvoices,
     };
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch card data.');
   }
 }
@@ -98,7 +109,8 @@ export async function fetchFilteredInvoices(query, currentPage) {
 
     return invoices.rows;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch invoices.');
   }
 }
@@ -121,7 +133,8 @@ export async function fetchInvoicesPages(query) {
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch total number of invoices.');
   }
 }
@@ -146,7 +159,8 @@ export async function fetchInvoiceById(id) {
 
     return invoice[0];
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch invoice.');
   }
 }
@@ -165,7 +179,8 @@ export async function fetchCustomers() {
     const customers = data.rows;
     return customers;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch all customers.');
   }
 }
@@ -199,7 +214,8 @@ export async function fetchFilteredCustomers(query) {
 
     return customers;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error:', error.message);
+    console.error('Stack Trace:', error.stack);
     throw new Error('Failed to fetch customer table.');
   }
 }

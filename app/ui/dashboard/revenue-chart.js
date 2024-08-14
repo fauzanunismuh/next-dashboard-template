@@ -1,11 +1,12 @@
-// revenue-chart.js
-import { generateYAxis } from '@/app/lib/utils'; // Tambahkan baris ini
+// /app/ui/dashboard/revenue-chart.js
+import { fetchRevenue } from '@/app/lib/data';
+import { generateYAxis } from '@/app/lib/utils';
 import { lusitana } from '@/app/ui/fonts';
 import { CalendarIcon } from '@heroicons/react/24/outline';
+export default async function RevenueChart() { // Jadikan komponen async, hapus props
+  const revenue = await fetchRevenue(); // Ambil data di dalam komponen
 
-export default async function RevenueChart({ revenue }) {
   const chartHeight = 350;
-
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
   if (!revenue || revenue.length === 0) {
